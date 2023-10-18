@@ -5,7 +5,7 @@
 }
 
 .section-sidebar {
-  overflow-y: scroll;
+  overflow-y: auto;
   padding: 16px;
   box-sizing: border-box;
   width: calc(100% * 1 / 3);
@@ -14,7 +14,7 @@
 
 .section-content {
   padding: 16px;
-  overflow-y: scroll;
+  overflow-y: auto;
   box-sizing: border-box;
   width: calc(100% * 2 / 3);
   background-color: orange;

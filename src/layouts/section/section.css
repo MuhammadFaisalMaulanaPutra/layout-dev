@@ -1,0 +1,21 @@
+.section-container {
+  display: flex;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.section-sidebar {
+  overflow-y: scroll;
+  padding: 16px;
+  box-sizing: border-box;
+  width: calc(100% * 1 / 3);
+  background-color: darkorange;
+}
+
+.section-content {
+  padding: 16px;
+  overflow-y: scroll;
+  box-sizing: border-box;
+  width: calc(100% * 2 / 3);
+  background-color: orange;
+}

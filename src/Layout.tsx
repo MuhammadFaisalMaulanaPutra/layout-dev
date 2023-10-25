@@ -1,32 +1,61 @@
-import Content from "./layouts/content/Content";
-import Main from "./layouts/main/Main";
-import Navigation from "./layouts/navigation/Navigation";
-import Section from "./layouts/section/Section";
+import {
+  NavigationLayout,
+  ContentLayout,
+  MainLayout,
+  SectionLayout,
+} from "./layouts";
 
 function Body() {
+  const myStyle: React.CSSProperties = {
+    display: "flex",
+    flexDirection: "column",
+    height: "70px",
+    width: "70px",
+    justifyContent: "center",
+    color: "#fff",
+  };
   return (
-    <ul className="nav-list">
-      <li className="nav-item">Item 1</li>
-      <li className="nav-item">Item 2</li>
-      <li className="nav-item">Item 3</li>
-      <li className="nav-item">Item 4</li>
-      <li className="nav-item">Item 5</li>
-      <li className="nav-item">Item 6</li>
+    <ul
+      style={{
+        display: "flex",
+        textAlign: "center",
+        padding: 0,
+        margin: 0,
+        flexDirection: "column",
+        listStyleType: "none",
+      }}
+    >
+      <li style={myStyle}>Item 1</li>
+      <li style={myStyle}>Item 2</li>
+      <li style={myStyle}>Item 3</li>
+      <li style={myStyle}>Item 4</li>
+      <li style={myStyle}>Item 5</li>
+      <li style={myStyle}>Item 6</li>
     </ul>
   );
 }
 
 function sideBar() {
   return (
-    <>
+    <div
+      style={{
+        backgroundColor: "darkorange",
+        padding: "20px",
+      }}
+    >
       <h1>SideBar</h1>
-    </>
+    </div>
   );
 }
 
 function Contents() {
   return (
-    <>
+    <div
+      style={{
+        backgroundColor: "orange",
+        padding: "20px",
+      }}
+    >
       <h1>Content</h1>
       <h2>
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusantium
@@ -42,29 +71,37 @@ function Contents() {
         atque aut accusantium labore. Placeat excepturi aut illo, iste incidunt
         asperiores odio.
       </h2>
-    </>
+    </div>
   );
 }
 
 function Layout() {
   return (
     <div>
-      <Navigation
+      <NavigationLayout
         headerNav={<h1>NAV</h1>}
         bodyNav={<Body />}
         footerNav={<h1>FT</h1>}
         content={
-          <Content
-            header={<h1>Title</h1>}
+          <ContentLayout
+            header={<h1 style={{ padding: "16px" }}>Title</h1>}
             main={
-              <Main
+              <MainLayout
                 menu={
-                  <>
+                  <div
+                    style={{
+                      backgroundColor: "green",
+                      padding: "20px",
+                      color: "#fff",
+                    }}
+                  >
                     <h1>Menu</h1>
                     <h2>Menu</h2>
-                  </>
+                  </div>
                 }
-                section={<Section sidebar={sideBar()} content={Contents()} />}
+                section={
+                  <SectionLayout sidebar={sideBar()} content={Contents()} />
+                }
               />
             }
           />

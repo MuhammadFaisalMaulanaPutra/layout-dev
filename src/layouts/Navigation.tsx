@@ -1,72 +1,36 @@
 import React from "react";
-import { INavigationProps } from "./utils";
+import { NavigationProps, createNavigationStyles } from "./utils";
+import { mergeClasses } from "@fluentui/react-components";
 
-const Navigation: React.FC<INavigationProps> = (props) => {
+const Navigation: React.FC<NavigationProps> = (props) => {
+  const styles = createNavigationStyles();
   return (
-    <div
-      style={{
-        display: "flex",
-        position: "fixed",
-        width: "100%",
-        height: "100%",
-        top: 0,
-        left: 0,
-      }}
-    >
+    <div className={styles.root}>
       <nav
+        className={mergeClasses(styles.nav, props.style)}
         style={{
-          height: "100%",
-          width: "70px",
-          position: "sticky",
-          backgroundColor: "#211c52",
-          overflowX: "hidden",
-          alignContent: "center",
+          width: props.navWidth,
         }}
       >
         <header
+          className={mergeClasses(styles.headerNav, props.style)}
           style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            position: "sticky",
-            top: "0px",
-            height: "70px",
-            color: "#fff",
-            zIndex: 1,
+            width: props.navWidth,
           }}
         >
-          {props.headerNav}
+          <div className={styles.headerItem}>{props.headerNav}</div>
         </header>
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          {props.bodyNav}
-        </div>
+        <div className={styles.bodyNav}>{props.bodyNav}</div>
         <footer
+          className={mergeClasses(styles.footer, props.style)}
           style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            position: "sticky",
-            bottom: 0,
-            height: "70px",
-            color: "#fff",
+            width: props.navWidth,
           }}
         >
-          {props.footerNav}
+          <div className={styles.footerItem}>{props.footerNav}</div>
         </footer>
       </nav>
-      <div
-        style={{
-          flex: 1,
-          top: 0,
-          right: 0,
-          width: "100%",
-          height: "100vh",
-          zIndex: 0,
-          backgroundColor: "#dbdbdb",
-        }}
-      >
-        {props.content}
-      </div>
+      <div className={styles.content}>{props.content}</div>
     </div>
   );
 };

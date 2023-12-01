@@ -1,27 +1,19 @@
 import React from "react";
-import { ISectionProps } from "./utils";
+import { SectionProps, createSectionStyles } from "./utils";
+import { mergeClasses } from "@fluentui/react-components";
 
-const Section: React.FC<ISectionProps> = (props) => {
+const Section: React.FC<SectionProps> = (props) => {
+  const styles = createSectionStyles();
+
   return (
-    <div style={{ display: "flex", height: "100%", overflow: "auto" }}>
+    <div className={styles.root}>
       <div
-        style={{
-          overflow: "auto",
-          boxSizing: "border-box",
-          width: "500px",
-        }}
+        className={mergeClasses(styles.sidebar, props.style)}
+        style={{ width: props.sideWidth }}
       >
         {props.sidebar}
       </div>
-      <div
-        style={{
-          overflow: "auto",
-          boxSizing: "border-box",
-          width: "100%",
-        }}
-      >
-        {props.content}
-      </div>
+      <div className={styles.content}>{props.content}</div>
     </div>
   );
 };

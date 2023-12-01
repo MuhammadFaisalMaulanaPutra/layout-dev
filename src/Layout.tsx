@@ -1,49 +1,58 @@
 import {
   NavigationLayout,
   ContentLayout,
-  MainLayout,
+  // MainLayout,
   SectionLayout,
+  MainLayout,
 } from "./layouts";
 
-function Body() {
-  const myStyle: React.CSSProperties = {
-    display: "flex",
-    flexDirection: "column",
-    height: "70px",
-    width: "70px",
-    justifyContent: "center",
-    color: "#fff",
-  };
-  return (
-    <ul
-      style={{
-        display: "flex",
-        textAlign: "center",
-        padding: 0,
-        margin: 0,
-        flexDirection: "column",
-        listStyleType: "none",
-      }}
-    >
-      <li style={myStyle}>Item 1</li>
-      <li style={myStyle}>Item 2</li>
-      <li style={myStyle}>Item 3</li>
-      <li style={myStyle}>Item 4</li>
-      <li style={myStyle}>Item 5</li>
-      <li style={myStyle}>Item 6</li>
-    </ul>
-  );
-}
+import { IconOnly } from "./components/tabList";
+import {
+  Navigation20Regular,
+  MoreHorizontal20Regular,
+  GridDots20Regular,
+} from "@fluentui/react-icons";
+import { useState } from "react";
+import { makeStyles, tokens } from "@fluentui/react-components";
 
-function sideBar() {
+// function Body() {
+//   const myStyle: React.CSSProperties = {
+//     display: "flex",
+//     flexDirection: "column",
+//     height: "70px",
+//     width: "70px",
+//     justifyContent: "center",
+//     color: "#000",
+//   };
+//   return (
+//     <ul
+//       style={{
+//         display: "flex",
+//         textAlign: "center",
+//         padding: 0,
+//         margin: 0,
+//         flexDirection: "column",
+//         listStyleType: "none",
+//       }}
+//     >
+//       <li style={myStyle}>Item 1</li>
+//       <li style={myStyle}>Item 2</li>
+//       <li style={myStyle}>Item 3</li>
+//       <li style={myStyle}>Item 4</li>
+//       <li style={myStyle}>Item 5</li>
+//       <li style={myStyle}>Item 6</li>
+//     </ul>
+//   );
+// }
+
+function sideContent() {
   return (
     <div
       style={{
-        backgroundColor: "darkorange",
-        padding: "20px",
+        padding: 20,
       }}
     >
-      <h1>SideBar</h1>
+      <h1>SidePanel</h1>
     </div>
   );
 }
@@ -52,12 +61,12 @@ function Contents() {
   return (
     <div
       style={{
-        backgroundColor: "orange",
         padding: "20px",
+        borderRadius: 5,
       }}
     >
       <h1>Content</h1>
-      <h2>
+      <span>
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusantium
         rerum libero dignissimos provident quaerat commodi ad soluta, facere
         voluptas, tempora eveniet placeat ipsam? Facilis atque iusto, quod
@@ -70,39 +79,66 @@ function Contents() {
         molestias? Eius quia ex quaerat adipisci soluta voluptatibus praesentium
         atque aut accusantium labore. Placeat excepturi aut illo, iste incidunt
         asperiores odio.
-      </h2>
+      </span>
     </div>
   );
 }
 
+const useStyles = makeStyles({
+  nav: { width: "200px" },
+  sideContent: { width: "300px" },
+});
+
 function Layout() {
+  const [sideBar, setSideBar] = useState(false);
+
+  const style = useStyles();
+
   return (
     <div>
-      <NavigationLayout
-        headerNav={<h1>NAV</h1>}
-        bodyNav={<Body />}
-        footerNav={<h1>FT</h1>}
-        content={
-          <ContentLayout
-            header={<h1 style={{ padding: "16px" }}>Title</h1>}
-            main={
+      <ContentLayout
+        header={
+          <div>
+            <div
+              style={{
+                display: "flex",
+                width: "48px",
+                justifyContent: "center",
+              }}
+            >
+              <GridDots20Regular />
+            </div>
+          </div>
+        }
+        main={
+          <NavigationLayout
+            headerNav={
+              <Navigation20Regular onClick={() => setSideBar(!sideBar)} />
+            }
+            bodyNav={<IconOnly isOpen={sideBar} />}
+            footerNav={<MoreHorizontal20Regular />}
+            navWidth={sideBar ? "240px" : ""}
+            // style={sideBar ? style.nav : ""}
+            content={
               <MainLayout
                 menu={
-                  <div
-                    style={{
-                      backgroundColor: "green",
-                      padding: "20px",
-                      color: "#fff",
-                    }}
-                  >
-                    <h1>Menu</h1>
-                    <h2>Menu</h2>
+                  <div style={{ padding: "20px" }}>
+                    <h1>Main Content</h1>
                   </div>
                 }
                 section={
-                  <SectionLayout sidebar={sideBar()} content={Contents()} />
+                  <SectionLayout
+                    sidebar={sideContent()}
+                    style={style.sideContent}
+                    content={Contents()}
+                  />
                 }
               />
+              // <SectionLayout
+              //   sidebar={sideContent()}
+              //   style={style.sideContent}
+              //   content={Contents()}
+              // />
             }
           />
         }

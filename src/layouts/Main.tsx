@@ -1,20 +1,13 @@
 import React from "react";
-import { IMainProps } from "./utils";
+import { MainProps, createMainStyles } from "./utils";
 
-const Main: React.FC<IMainProps> = (props) => {
+const Main: React.FC<MainProps> = (props) => {
+  const styles = createMainStyles();
+
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        height: "100%",
-        width: "100%",
-      }}
-    >
-      <div style={{ height: "auto" }}>{props.menu}</div>
-      <div style={{ display: "flex", flex: 1, overflow: "auto" }}>
-        {props.section}
-      </div>
+    <div className={styles.root}>
+      <div className={styles.menu}>{props.menu}</div>
+      <div className={styles.section}>{props.section}</div>
     </div>
   );
 };

@@ -1,23 +1,27 @@
 import { ReactNode } from "react";
 
-export interface INavigationProps {
+export interface NavigationProps {
   headerNav?: ReactNode;
   bodyNav?: ReactNode;
   footerNav?: ReactNode;
   content?: ReactNode;
+  navWidth?: string;
+  style?: string;
 }
 
-export interface IContentProps {
+export interface ContentProps {
   header?: ReactNode;
   main?: ReactNode;
 }
 
-export interface IMainProps {
+export interface MainProps {
   menu?: ReactNode;
   section?: ReactNode;
 }
 
-export interface ISectionProps {
+export interface SectionProps {
   sidebar?: ReactNode;
   content?: ReactNode;
+  sideWidth?: string;
+  style?: string;
 }

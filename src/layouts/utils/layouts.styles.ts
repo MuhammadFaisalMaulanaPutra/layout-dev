@@ -114,10 +114,10 @@ export const createSectionStyles = makeStyles({
   },
   sidebar: {
     ...shorthands.overflow("auto"),
-    width: "600px",
+    width: "400px",
   },
   content: {
     ...shorthands.overflow("auto"),
-    width: "100%",
+    ...shorthands.flex(1),
   },
 });
